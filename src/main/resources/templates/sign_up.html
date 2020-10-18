@@ -1,0 +1,71 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <title>Sign up</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <script>
+        function checkingTheCorrectnessOfData() {
+            var password = document.forms['signUp']['password'].value;
+            var repeat_password = document.forms['signUp']['repeat_password'].value;
+            var email = document.forms['signUp']['email'].value;
+
+            if(email === ""){
+                alert("Fill in all fields.");
+                return false;
+            }
+
+            if(password !== repeat_password){
+                alert("Passwords are different from each other.");
+                return false;
+            } else if(password === ""){
+                alert("Fill in all fields.");
+                return false;
+            }
+        }
+    </script>
+
+</head>
+
+
+<div class="container" style="padding-top: 75px">
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Create Account</h4>
+            <form name="signUp" action="/sign_up" method='POST' onsubmit="return checkingTheCorrectnessOfData()">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <input name="email" class="form-control" placeholder="E-mail" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Create password" type="password" name="password">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="Repeat password" type="password" name="repeat_password">
+                </div>
+                <div class="form-group">
+                    <button name="submit" type="submit" class="btn btn-primary btn-block">
+                        Create Account
+                    </button>
+                </div>
+                <p class="text-center">Do you have an account? <a href="/login">Log In</a></p>
+            </form>
+        </article>
+    </div>
+</div>
+</html>

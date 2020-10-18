@@ -20,13 +20,12 @@ public class User implements UserDetails {
     @Column
     private String password;
 
+    public User(){}
+
     public User(String email, String password) {
         super();
         this.email = email;
         this.password = password;
-    }
-
-    public User() {
     }
 
     /// GETTERS AND SETTERS ///

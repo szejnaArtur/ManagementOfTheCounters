@@ -28,3 +28,8 @@ body{
 .menu-separator-v{
     border-left: 2px solid white;
 }
+
+.unstyled-button{
+    border: none;
+    background: none;
+}
