@@ -26,7 +26,6 @@ public class CustomDaoAuthenticationProvider implements AuthenticationProvider {
     private static final String INCORRECT_PASSWORD = "Incorrect password";
 
 
-
     @Autowired
     public CustomDaoAuthenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
@@ -47,6 +46,10 @@ public class CustomDaoAuthenticationProvider implements AuthenticationProvider {
         boolean passwordMatch = passwordEncoder.matches(password, userDetails.getPassword());
 
         if (!passwordMatch) {
+            throw new BadCredentialsException(INCORRECT_PASSWORD);
+        }
+
+        if (!userDetails.isEnabled()) {
             throw new BadCredentialsException(INCORRECT_PASSWORD);
         }
 

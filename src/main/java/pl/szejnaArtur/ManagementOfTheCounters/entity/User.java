@@ -20,12 +20,20 @@ public class User implements UserDetails {
     @Column
     private String password;
 
+    @Column
+    private String confirmationToken;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean enabled;
+
     public User(){}
 
-    public User(String email, String password) {
-        super();
-        this.email = email;
-        this.password = password;
+    public static User of(String email, String password){
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setEnabled(false);
+        return user;
     }
 
     /// GETTERS AND SETTERS ///
@@ -41,7 +49,7 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setEmail(String email) {
+    private void setEmail(String email) {
         this.email = email;
     }
 
@@ -51,6 +59,18 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     /// OTHER IMPLEMENTATION ///
@@ -81,6 +101,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 }
