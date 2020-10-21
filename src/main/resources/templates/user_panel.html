@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="text/html">
     <title>User Panel</title>
     <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div th:insert="menu.html :: div"></div>
-<h1>User Panel</h1>
+<table class="table table-bordered">
+    <thead>
+    <tr >
+        <td>Name</td>
+        <td>Room</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody th:each="counter : ${counters}">
+    <tr>
+        <td th:text="${counter.name}"></td>
+        <td th:text="${counter.room}"></td>
+        <td><a href="#">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

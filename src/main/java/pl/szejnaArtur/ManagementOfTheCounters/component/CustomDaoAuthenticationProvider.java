@@ -1,6 +1,7 @@
 package pl.szejnaArtur.ManagementOfTheCounters.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,20 +12,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import pl.szejnaArtur.ManagementOfTheCounters.service.impl.CounterServiceImpl;
 
 @Component
 public class CustomDaoAuthenticationProvider implements AuthenticationProvider {
 
     private UserDetailsService userDetailsService;
-
     private PasswordEncoder passwordEncoder;
 
     private static final String USERNAME_CANNOT_BE_NULL = "Username cannot be null";
-
     private static final String CREDENTIALS_CANNOT_BE_NULL = "Credentials cannot be null";
-
     private static final String INCORRECT_PASSWORD = "Incorrect password";
-
 
     @Autowired
     public CustomDaoAuthenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
@@ -54,12 +52,10 @@ public class CustomDaoAuthenticationProvider implements AuthenticationProvider {
         }
 
         return new UsernamePasswordAuthenticationToken(name, password, userDetails.getAuthorities());
-
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
-
 }

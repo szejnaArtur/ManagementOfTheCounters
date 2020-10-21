@@ -8,6 +8,9 @@ public class ManagementOfTheCountersApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ManagementOfTheCountersApplication.class, args);
+
+
+
     }
 }
 
