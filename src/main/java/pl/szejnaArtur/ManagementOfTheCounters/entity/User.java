@@ -1,10 +1,14 @@
 package pl.szejnaArtur.ManagementOfTheCounters.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "user")
@@ -26,13 +30,19 @@ public class User implements UserDetails {
     @Column(columnDefinition = "boolean default false")
     private boolean enabled;
 
-    public User(){}
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_role"))
+    private Set<Role> roles;
 
-    public static User of(String email, String password){
+    public User() {
+    }
+
+    public static User of(String email, String password) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setEnabled(false);
+        user.roles = new HashSet<>();
         return user;
     }
 
@@ -73,10 +83,18 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     /// OTHER IMPLEMENTATION ///
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles.stream().map(role-> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
     }
 
     @Override
