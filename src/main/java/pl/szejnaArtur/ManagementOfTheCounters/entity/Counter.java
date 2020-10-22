@@ -19,7 +19,7 @@ public class Counter {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Counter(){
+    public Counter() {
 
     }
 

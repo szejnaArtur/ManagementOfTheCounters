@@ -66,9 +66,12 @@
         </div>
         <div class="bottom-action clearfix">
             <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
-            <a href="/forgot_password" class="float-right">Forgot Password?</a>
+            <a href="#" data-target="#pwdModal" class="float-right" data-toggle="modal">Forgot Password?</a>
         </div>
     </form>
+
+    <div th:insert="forgot_password.html :: div"></div>
+
     <p class="text-center small">Don't have an account! <a href="/sign_up">Sign up here</a>.</p>
 </div>
 
