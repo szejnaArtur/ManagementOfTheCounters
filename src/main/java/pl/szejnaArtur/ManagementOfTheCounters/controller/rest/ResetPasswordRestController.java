@@ -14,7 +14,7 @@ public class ResetPasswordRestController {
 
     private final static String SUBJECT = "Link to reset your password";
     private final static String TEXT = "If you want to set a new password for this account, click the link:";
-    private final static String LINK = "http://localhost:8080/reset_password?token=";
+    private final static String LINK = "http://localhost:8080/reset_password/";
 
     private final static String NULL_POINTER_EXCEPTION_MESSAGE = "The user with the given e-mail address does not exist";
 

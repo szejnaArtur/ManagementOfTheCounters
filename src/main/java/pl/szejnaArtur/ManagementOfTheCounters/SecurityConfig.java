@@ -3,6 +3,7 @@ package pl.szejnaArtur.ManagementOfTheCounters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -33,14 +34,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .httpBasic()
+                .and()
+
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/send_reset_mail").permitAll()
+                .antMatchers("/send_reset_mail/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/reset_credentials").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/sign_up").permitAll()
                 .antMatchers("/confirm_email").permitAll()
                 .antMatchers("/forgot_password").permitAll()
-                .antMatchers("/reset_password").permitAll()
+                .antMatchers("/reset_password/**").permitAll()
                 .anyRequest().hasAuthority("USER")
                 .and()
 

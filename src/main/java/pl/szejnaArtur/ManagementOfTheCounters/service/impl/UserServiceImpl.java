@@ -1,32 +1,29 @@
 package pl.szejnaArtur.ManagementOfTheCounters.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
 import pl.szejnaArtur.ManagementOfTheCounters.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.service.UserService;
 
 import java.util.Optional;
 
 @Service
-public class JpaUserDetailsService implements UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
     @Autowired
-    public JpaUserDetailsService(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> emailOptional = userRepository.findByEmail(email);
+    public User loadUserByToken(String token) throws UsernameNotFoundException {
+        Optional<User> emailOptional = userRepository.findByConfirmationToken(token);
 
         if(!emailOptional.isPresent()){
-            throw new UsernameNotFoundException("No user found with e-mail: " + email);
+            throw new UsernameNotFoundException("No user found with the given token");
         }
 
         return emailOptional.get();
