@@ -12,6 +12,8 @@ import pl.szejnaArtur.ManagementOfTheCounters.service.SignUpService;
 @Controller
 public class SignUpController {
 
+    private static final String SUCCESS_SIGN_UP = "The user was created. Confirm your registration using the email link.";
+
     private SignUpService signUpService;
     private SignUpMailer mailer;
 
@@ -24,6 +26,7 @@ public class SignUpController {
     @PostMapping(value = "/sign_up")
     public ModelAndView signUp(ModelAndView modelAndView, @RequestParam("email") String email, @RequestParam("password") String password) {
         modelAndView.setViewName("redirect:/login");
+        modelAndView.addObject("success_message", SUCCESS_SIGN_UP);
         signUpService.signUpUser(User.of(email, password));
         return modelAndView;
     }

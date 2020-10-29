@@ -19,6 +19,26 @@
     font-size: 18px;
 }
 
+.login_success{
+    color: green;
+    border: 1px solid #02b502;
+    background-color: greenyellow;
+    font-size: 12px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+}
+
+.login_error{
+    color: #660000;
+    border: 1px solid #660000;
+    background-color: red;
+    font-size: 12px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+}
+
 .btn {
     font-size: 15px;
     font-weight: bold;

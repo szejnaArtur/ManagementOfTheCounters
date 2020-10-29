@@ -32,14 +32,33 @@
                 alert(getParameterByName("error"));
             }
         }
+    </script>
 
+    <script>
+        function visibleOrHidden() {
+            let message_success = getParameterByName("success_message");
+            let message_error = getParameterByName("error_message");
+            if (message_success === "") {
+                document.getElementById("message_success").remove();
+            } else {
+                document.getElementById("message_success").style.visibility = "visible";
+            }
+
+            if (message_error === "") {
+                document.getElementById("message_error").remove();
+            } else {
+                document.getElementById("message_error").style.visibility = "visible";
+            }
+        }
     </script>
 
 </head>
-<body onload="showError()">
+<body onload="visibleOrHidden()">
 <div class="login-form">
     <form action="/login" method="POST">
         <h2 class="text-center">Sign In</h2>
+        <h4 id="message_success" class="text-center login_success" th:text="${param.success_message}"></h4>
+        <h4 id="message_error" class="text-center login_error" th:text="${param.error_message}"></h4>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
