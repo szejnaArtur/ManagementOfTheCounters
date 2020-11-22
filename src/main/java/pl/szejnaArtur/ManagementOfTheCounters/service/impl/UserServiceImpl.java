@@ -15,14 +15,14 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public User loadUserByToken(String token) throws UsernameNotFoundException {
         Optional<User> emailOptional = userRepository.findByConfirmationToken(token);
 
-        if(!emailOptional.isPresent()){
+        if (!emailOptional.isPresent()) {
             throw new UsernameNotFoundException("No user found with the given token");
         }
 

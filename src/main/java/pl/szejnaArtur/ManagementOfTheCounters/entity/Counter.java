@@ -1,8 +1,15 @@
 package pl.szejnaArtur.ManagementOfTheCounters.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Setter
+@Getter
+@NoArgsConstructor
 public class Counter {
 
     @Id
@@ -15,46 +22,18 @@ public class Counter {
     @Column
     private String room;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column
+    private String unit;
 
-    public Counter() {
+    @Column
+    private Double price;
 
-    }
+    @Column
+    private String billingPeriod;
 
-    /// GETTERS AND SETTERS ///
-    public Long getCounterId() {
-        return counterId;
-    }
-
-    public void setCounterId(Long counterId) {
-        this.counterId = counterId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRoom() {
-        return room;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    @JoinColumn(name = "property_id")
+//    private Property property;
 }
 
 

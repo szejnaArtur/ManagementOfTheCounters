@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8" content="text/html">
-    <title>User Panel</title>
+    <title>Counters</title>
     <link rel="stylesheet" type="text/css" href="css/menu.css">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
 
@@ -11,26 +11,6 @@
 </head>
 <body>
 <div th:insert="menu.html :: div"></div>
-
-<div>
-    <a href="property">Add another property</a>
-</div>
-
-<table class="table table-bordered">
-    <thead>
-    <tr >
-        <td>Name</td>
-        <td>Street</td>
-        <td></td>
-    </tr>
-    </thead>
-    <tbody th:each="property : ${properties}">
-    <tr>
-        <td th:text="${property.name}"></td>
-        <td th:text="${property.street}"></td>
-        <td><a href="#">Edit</a></td>
-    </tr>
-    </tbody>
-</table>
+<h1>COUNTERS</h1>
 </body>
 </html>

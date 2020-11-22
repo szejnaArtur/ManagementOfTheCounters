@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8" content="text/html">
+    <title>User Panel</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="menu.html :: div"></div>
+
+<div class="container">
+    <form class="form-horizontal" role="form" action="/property/add">
+        <h2>Registration</h2>
+        <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">Name*</label>
+            <div class="col-sm-9">
+                <input type="text" id="name" placeholder="Name" class="form-control" name="name" autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="street" class="col-sm-3 control-label">Street*</label>
+            <div class="col-sm-9">
+                <input type="text" id="street" placeholder="Street" class="form-control" name="street" autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="houseNumber" class="col-sm-3 control-label">House Number</label>
+            <div class="col-sm-9">
+                <input type="number" id="houseNumber" placeholder="House Number" class="form-control" name="houseNumber">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="flatNumber" class="col-sm-3 control-label">Flat Number</label>
+            <div class="col-sm-9">
+                <input type="number" id="flatNumber" placeholder="Flat Number" class="form-control" name="flatNumber">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="postalCode" class="col-sm-3 control-label">Postal Code</label>
+            <div class="col-sm-9">
+                <input type="text" id="postalCode" placeholder="Postal Code" class="form-control" name="postalCode">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="city" class="col-sm-3 control-label">City*</label>
+            <div class="col-sm-9">
+                <input type="text" id="city" placeholder="City" class="form-control" name="city">
+            </div>
+        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>-->
+<!--            <div class="col-sm-9">-->
+<!--                <input type="phoneNumber" id="phoneNumber" placeholder="Phone number" class="form-control">-->
+<!--                <span class="help-block">Your phone number won't be disclosed anywhere </span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="Height" class="col-sm-3 control-label">Height* </label>-->
+<!--            <div class="col-sm-9">-->
+<!--                <input type="number" id="height" placeholder="Please write your height in centimetres" class="form-control">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="weight" class="col-sm-3 control-label">Weight* </label>-->
+<!--            <div class="col-sm-9">-->
+<!--                <input type="number" id="weight" placeholder="Please write your weight in kilograms" class="form-control">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label class="control-label col-sm-3">Gender</label>-->
+<!--            <div class="col-sm-6">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <label class="radio-inline">-->
+<!--                            <input type="radio" id="femaleRadio" value="Female">Female-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <label class="radio-inline">-->
+<!--                            <input type="radio" id="maleRadio" value="Male">Male-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div> &lt;!&ndash; /.form-group &ndash;&gt;-->
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <span class="help-block">*Required fields</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form> <!-- /form -->
+</div> <!-- ./container -->
+</body>
+</html>

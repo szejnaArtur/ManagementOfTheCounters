@@ -1,5 +1,8 @@
 package pl.szejnaArtur.ManagementOfTheCounters.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +15,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "user")
 public class User implements UserDetails {
 
@@ -36,10 +42,7 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Counter> counters;
-
-    public User() {
-    }
+    private List<Property> properties;
 
     public static User of(String email, String password) {
         User user = new User();
@@ -48,59 +51,6 @@ public class User implements UserDetails {
         user.setEnabled(false);
         user.roles = new HashSet<>();
         return user;
-    }
-
-    /// GETTERS AND SETTERS ///
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    private void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmationToken() {
-        return confirmationToken;
-    }
-
-    public void setConfirmationToken(String confirmationToken) {
-        this.confirmationToken = confirmationToken;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public List<Counter> getCounters() {
-        return counters;
-    }
-
-    public void setCounters(List<Counter> counters) {
-        this.counters = counters;
     }
 
     /// OTHER IMPLEMENTATION ///
