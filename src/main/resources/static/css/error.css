@@ -1,0 +1,52 @@
+.error-background {
+    background: rgb(103, 0, 0);
+    background: linear-gradient(90deg, rgba(103, 0, 0, 1) 0%, rgba(217, 0, 0, 1) 50%, rgba(103, 0, 0, 1) 100%);
+    font-family: 'Lato', sans-serif;
+}
+
+.title {
+    font-size: 8rem;
+    color: white;
+    font-weight: 700;
+    margin: auto;
+}
+
+.medium-text {
+    font-size: 2rem;
+    font-weight: 400;
+    color: white;
+    margin: auto;
+}
+
+.small-text {
+    font-size: 1rem;
+    font-weight: 400;
+    color: white;
+    margin: 15px auto;
+}
+
+.button {
+    font-weight: 700;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 1rem;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-left: auto;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.button:hover{
+    color: black;
+    background-color: white;
+}
+
+.error-wrapper{
+    display: flex;
+    flex-direction: column;
+}
