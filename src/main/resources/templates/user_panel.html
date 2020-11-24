@@ -13,7 +13,7 @@
 <div th:insert="menu.html :: div"></div>
 
 <div>
-    <a href="property">Add another property</a>
+    <a href="property/addPropertyPanel">Add another property</a>
 </div>
 
 <table class="table table-bordered">
@@ -28,7 +28,7 @@
     <tr>
         <td th:text="${property.name}"></td>
         <td th:text="${property.street}"></td>
-        <td><a href="#">Edit</a></td>
+        <td><a th:href="${'/property/view/'+property.propertyId}">View</a></td>
     </tr>
     </tbody>
 </table>

@@ -3,6 +3,7 @@ package pl.szejnaArtur.ManagementOfTheCounters.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
+import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
 import pl.szejnaArtur.ManagementOfTheCounters.repository.CounterRepository;
 
@@ -20,6 +21,10 @@ public class CounterServiceImpl {
 
     public List<Counter> getAllCounters() {
         return counterRepository.findAll();
+    }
+
+    public List<Counter> getAllCountersByProperty(Property property){
+        return counterRepository.findAllByProperty(property);
     }
 
 }

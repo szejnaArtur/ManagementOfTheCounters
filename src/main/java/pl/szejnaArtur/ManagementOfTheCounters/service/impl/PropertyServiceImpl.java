@@ -27,4 +27,8 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyRepository.save(property);
     }
 
+    public Property getProperty(Long id){
+        return propertyRepository.findByPropertyId(id);
+    }
+
 }

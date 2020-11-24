@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Property</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/counter.css}">
+</head>
+<body>
+<table>
+    <tr>
+        <td>Name</td>
+        <td th:text="${property.name}"></td>
+    </tr>
+    <tr>
+        <td>Street</td>
+        <td th:text="${property.street}"></td>
+    </tr>
+    <tr>
+        <td>House Number</td>
+        <td th:text="${property.houseNumber}"></td>
+    </tr>
+    <tr>
+        <td>Flat Number</td>
+        <td th:text="${property.flatNumber}"></td>
+    </tr>
+    <tr>
+        <td>City</td>
+        <td th:text="${property.city}"></td>
+    </tr>
+    <tr>
+        <td>Postal Coder</td>
+        <td th:text="${property.postalCode}"></td>
+    </tr>
+</table>
+<div class="circle" th:each="counter : ${counters}">
+    <div class="title" th:text="${counter.name}"></div>
+</div>
+
+
+</body>
+</html>

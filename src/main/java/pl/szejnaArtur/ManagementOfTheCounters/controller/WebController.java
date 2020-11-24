@@ -37,12 +37,6 @@ public class WebController {
         return mav;
     }
 
-    @RequestMapping(value="/property", method=RequestMethod.GET)
-    public ModelAndView addPropertyPanel(ModelAndView mav) {
-        mav.setViewName("addProperty");
-        return mav;
-    }
-
     @RequestMapping(value="/counters", method=RequestMethod.GET)
     public ModelAndView counterPanel(ModelAndView mav) {
         mav.setViewName("counter");

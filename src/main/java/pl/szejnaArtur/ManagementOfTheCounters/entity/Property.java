@@ -1,18 +1,23 @@
 package pl.szejnaArtur.ManagementOfTheCounters.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
+@ToString
 public class Property {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long property_id;
+    private Long propertyId;
 
     @Column
     private String name;
@@ -36,8 +41,8 @@ public class Property {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @OneToMany(mappedBy = "property", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-//    private List<Counter> counters;
+    @OneToMany(mappedBy = "property", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Counter> counters;
 
     public static Property of(String name, String street, String houseNumber, String flatNumber, String postalCode,
                               String city, User user) {
