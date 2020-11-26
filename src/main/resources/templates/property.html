@@ -35,6 +35,9 @@
 </table>
 <div class="circle" th:each="counter : ${counters}">
     <div class="title" th:text="${counter.name}"></div>
+    <div th:each="meterStatus : ${counter.meterStatutes}">
+        <div th:text="${meterStatus.status}"></div>
+    </div>
 </div>
 
 
