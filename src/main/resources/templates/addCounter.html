@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8" content="text/html">
-    <title>User Panel</title>
+    <title>Add Counter</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
 
@@ -17,8 +17,11 @@
 <div th:insert="menu.html :: div"></div>
 
 <div class="container">
-    <form class="form-horizontal" role="form" action="/property/add">
-        <h2>Add Property</h2>
+    <form class="form-horizontal" role="form" action="/counter/add">
+        <h2>Add Counter</h2>
+        <label>
+            <input type="hidden" name="propertyID" th:value="${propertyId}">
+        </label>
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Name*</label>
             <div class="col-sm-9">
@@ -26,33 +29,33 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="street" class="col-sm-3 control-label">Street*</label>
+            <label for="unit" class="col-sm-3 control-label">Unit*</label>
             <div class="col-sm-9">
-                <input type="text" id="street" placeholder="Street" class="form-control" name="street" autofocus>
+                <input type="text" id="unit" placeholder="Unit" class="form-control" name="unit" autofocus>
             </div>
         </div>
         <div class="form-group">
-            <label for="houseNumber" class="col-sm-3 control-label">House Number</label>
+            <label for="price" class="col-sm-3 control-label">Price*</label>
             <div class="col-sm-9">
-                <input type="number" id="houseNumber" placeholder="House Number" class="form-control" name="houseNumber">
+                <input type="number" step="0.01" id="price" placeholder="Price" class="form-control" name="price">
             </div>
         </div>
         <div class="form-group">
-            <label for="flatNumber" class="col-sm-3 control-label">Flat Number</label>
+            <label for="billingPeriod" class="col-sm-3 control-label">Billing Period*</label>
             <div class="col-sm-9">
-                <input type="number" id="flatNumber" placeholder="Flat Number" class="form-control" name="flatNumber">
+                <input type="number" step="1" id="billingPeriod" placeholder="Billing Period" class="form-control" name="billingPeriod">
             </div>
         </div>
         <div class="form-group">
-            <label for="postalCode" class="col-sm-3 control-label">Postal Code</label>
+            <label for="firstBillingPeriod" class="col-sm-3 control-label">First Billing Period*</label>
             <div class="col-sm-9">
-                <input type="text" id="postalCode" placeholder="Postal Code" class="form-control" name="postalCode">
+                <input type="text" id="firstBillingPeriod" placeholder="First Billing Period" class="form-control" name="firstBillingPeriod">
             </div>
         </div>
         <div class="form-group">
-            <label for="city" class="col-sm-3 control-label">City*</label>
+            <label for="initialState" class="col-sm-3 control-label">Initial State*</label>
             <div class="col-sm-9">
-                <input type="text" id="city" placeholder="City" class="form-control" name="city">
+                <input type="number" step="0.01" id="initialState" placeholder="Initial State" class="form-control" name="initialState">
             </div>
         </div>
         <div class="form-group">

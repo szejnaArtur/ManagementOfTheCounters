@@ -4,6 +4,7 @@ import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
 
 public interface PropertyService {
 
-    Property addProperty(Property property);
+    void addProperty(Property property);
 
+    Property getProperty(Long propertyID);
 }

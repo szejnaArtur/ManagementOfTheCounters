@@ -4,42 +4,60 @@
     <meta charset="UTF-8">
     <title>Property</title>
 
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/property.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/counter.css}">
 </head>
 <body>
-<table>
-    <tr>
-        <td>Name</td>
-        <td th:text="${property.name}"></td>
-    </tr>
-    <tr>
-        <td>Street</td>
-        <td th:text="${property.street}"></td>
-    </tr>
-    <tr>
-        <td>House Number</td>
-        <td th:text="${property.houseNumber}"></td>
-    </tr>
-    <tr>
-        <td>Flat Number</td>
-        <td th:text="${property.flatNumber}"></td>
-    </tr>
-    <tr>
-        <td>City</td>
-        <td th:text="${property.city}"></td>
-    </tr>
-    <tr>
-        <td>Postal Coder</td>
-        <td th:text="${property.postalCode}"></td>
-    </tr>
-</table>
-<div class="circle" th:each="counter : ${counters}">
-    <div class="title" th:text="${counter.name}"></div>
-    <div th:each="meterStatus : ${counter.meterStatutes}">
-        <div th:text="${meterStatus.status}"></div>
+<div id="container">
+    <div id="propertyName">
+        <h1 th:text="${property.name}"></h1>
+    </div>
+    <div id="data">
+        <table>
+            <tr>
+                <td>Street</td>
+                <td th:text="${property.street}"></td>
+            </tr>
+            <tr>
+                <td>House Number</td>
+                <td th:text="${property.houseNumber}"></td>
+            </tr>
+            <tr>
+                <td>Flat Number</td>
+                <td th:text="${property.flatNumber}"></td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td th:text="${property.city}"></td>
+            </tr>
+            <tr>
+                <td>Postal Coder</td>
+                <td th:text="${property.postalCode}"></td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-left: auto; margin-right: auto">
+        <form action="/counter/addCounterPanel">
+            <input type="hidden" name="property-id" th:value="${property.propertyId}">
+            <button type="submit" class="btn btn-primary btn-block">Add counter</button>
+        </form>
+<!--        <a href="/counter/addCounterPanel">Add counter</a>-->
+    </div>
+    <div class="counters-container">
+        <table>
+            <tr>
+                <th>Nazwa</th>
+                <th>Stan licznika</th>
+            </tr>
+            <tr th:each="counter : ${counters}">
+                <td th:text="${counter.name}"></td>
+                <td th:text="${counter.initialState}">
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
-
-
 </body>
 </html>

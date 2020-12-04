@@ -27,4 +27,8 @@ public class CounterServiceImpl {
         return counterRepository.findAllByProperty(property);
     }
 
+    public Counter addCounter(Counter counter){
+        return counterRepository.save(counter);
+    }
+
 }

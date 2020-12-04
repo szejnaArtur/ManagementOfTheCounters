@@ -23,8 +23,8 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyRepository.findAllByUser(user);
     }
 
-    public Property addProperty(Property property){
-        return propertyRepository.save(property);
+    public void addProperty(Property property){
+        propertyRepository.save(property);
     }
 
     public Property getProperty(Long id){
