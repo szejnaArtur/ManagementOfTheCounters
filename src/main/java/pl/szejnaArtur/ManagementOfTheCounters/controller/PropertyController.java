@@ -35,7 +35,7 @@ public class PropertyController {
         this.counterService = counterService;
     }
 
-    @RequestMapping(value="/property/addPropertyPanel", method=RequestMethod.GET)
+    @RequestMapping(value = "/property/addPropertyPanel", method = RequestMethod.GET)
     public ModelAndView addPropertyPanel(ModelAndView mav) {
         mav.setViewName("addProperty");
         return mav;
@@ -48,6 +48,7 @@ public class PropertyController {
                                          @RequestParam("city") String city) {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(userName).get();
+
         Property property = Property.of(name, street, houseNumber, flatNumber, postalCode, city, user);
         propertyService.addProperty(property);
         mav.setViewName("redirect:/user_panel");
@@ -55,12 +56,12 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "/property/view/{id}")
-    public ModelAndView viewProperty(ModelAndView mav, @PathVariable("id") Long id){
+    public ModelAndView viewProperty(ModelAndView mav, @PathVariable("id") Long id) {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(userName).get();
         List<Property> properties = propertyService.getPropertiesByUser(user);
         Optional<Property> optionalProperty = properties.stream().filter(i -> i.getPropertyId().equals(id)).findFirst();
-        if(optionalProperty.isPresent()){
+        if (optionalProperty.isPresent()) {
             Property property = optionalProperty.get();
             mav.addObject("property", property);
             List<Counter> counters = counterService.getAllCountersByProperty(property);

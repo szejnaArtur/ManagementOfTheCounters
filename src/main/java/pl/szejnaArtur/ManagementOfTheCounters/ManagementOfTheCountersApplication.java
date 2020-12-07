@@ -10,7 +10,6 @@ public class ManagementOfTheCountersApplication {
         SpringApplication.run(ManagementOfTheCountersApplication.class, args);
 
 
-
     }
 }
 

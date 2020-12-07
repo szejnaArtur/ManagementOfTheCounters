@@ -25,7 +25,7 @@ public class SignUpMailer {
         mailSender.send(message);
     }
 
-    public void sendConfirmationLink(String email, String token){
+    public void sendConfirmationLink(String email, String token) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject(textFactory.getConfirmationMailSubject());

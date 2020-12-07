@@ -18,7 +18,7 @@ public class CounterController {
     private PropertyService propertyService;
 
     @Autowired
-    public CounterController(PropertyService propertyService, CounterServiceImpl counterService){
+    public CounterController(PropertyService propertyService, CounterServiceImpl counterService) {
         this.counterService = counterService;
         this.propertyService = propertyService;
     }
@@ -26,7 +26,7 @@ public class CounterController {
     @RequestMapping(value = "/counter/addCounterPanel", method = RequestMethod.GET)
     public ModelAndView addCounterPanel(ModelAndView mav, @RequestParam("property-id") String propertyId) {
         mav.setViewName("addCounter");
-        mav.addObject("propertyId" ,propertyId);
+        mav.addObject("propertyId", propertyId);
         return mav;
     }
 
@@ -37,8 +37,7 @@ public class CounterController {
                                          @RequestParam("billingPeriod") Integer billingPeriod,
                                          @RequestParam("firstBillingPeriod") String firstBillingPeriod,
                                          @RequestParam("initialState") Double initialState,
-                                         @RequestParam("propertyID") Long propertyID)
-    {
+                                         @RequestParam("propertyID") Long propertyID) {
 
         Property property = propertyService.getProperty(propertyID);
         Counter counter = Counter.of(name, unit, price, billingPeriod, firstBillingPeriod, initialState, property);

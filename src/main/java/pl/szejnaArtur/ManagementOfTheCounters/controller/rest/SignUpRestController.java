@@ -15,14 +15,14 @@ public class SignUpRestController {
     private UserRepository userRepository;
 
     @Autowired
-    public SignUpRestController(UserRepository userRepository){
+    public SignUpRestController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @RequestMapping("/confirm_email")
-    public String confirmEmail(@RequestParam(name = "token") String token){
+    public String confirmEmail(@RequestParam(name = "token") String token) {
         Optional<User> optionalUser = userRepository.findByConfirmationToken(token);
-        if(optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setEnabled(true);
             userRepository.save(user);

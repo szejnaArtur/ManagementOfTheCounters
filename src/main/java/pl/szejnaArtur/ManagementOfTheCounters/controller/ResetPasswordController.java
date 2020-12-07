@@ -20,19 +20,19 @@ public class ResetPasswordController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ResetPasswordController(UserServiceImpl userService, UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public ResetPasswordController(UserServiceImpl userService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping(value="/forgot_password", method= RequestMethod.GET)
+    @RequestMapping(value = "/forgot_password", method = RequestMethod.GET)
     public ModelAndView forgotPassword(ModelAndView mav) {
         mav.setViewName("forgot_password");
         return mav;
     }
 
-    @RequestMapping(value="/reset_password/{token}", method=RequestMethod.GET)
+    @RequestMapping(value = "/reset_password/{token}", method = RequestMethod.GET)
     public ModelAndView resetPassword(ModelAndView mav, @PathVariable(name = "token") String token) {
         User user = userService.loadUserByToken(token);
         mav.addObject("user", user);

@@ -16,7 +16,7 @@ public class JpaUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
-    public JpaUserDetailsService(UserRepository userRepository){
+    public JpaUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -25,7 +25,7 @@ public class JpaUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> emailOptional = userRepository.findByEmail(email);
 
-        if(!emailOptional.isPresent()){
+        if (!emailOptional.isPresent()) {
             throw new UsernameNotFoundException("No user found with e-mail: " + email);
         }
 

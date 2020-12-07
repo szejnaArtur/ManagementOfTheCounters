@@ -12,7 +12,7 @@ public class RandomStringFactory {
     public static String getRandomString(int lenght) {
         StringBuilder builder = new StringBuilder();
         Random random = new Random();
-        for ( int i = 0; i < lenght; i++ ) {
+        for (int i = 0; i < lenght; i++) {
             builder.append(chars.charAt(random.nextInt(chars.length())));
         }
         return builder.toString();

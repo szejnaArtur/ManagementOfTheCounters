@@ -15,19 +15,19 @@ public class PropertyServiceImpl implements PropertyService {
     private PropertyRepository propertyRepository;
 
     @Autowired
-    public PropertyServiceImpl(PropertyRepository propertyRepository){
+    public PropertyServiceImpl(PropertyRepository propertyRepository) {
         this.propertyRepository = propertyRepository;
     }
 
-    public List<Property> getPropertiesByUser(User user){
+    public List<Property> getPropertiesByUser(User user) {
         return propertyRepository.findAllByUser(user);
     }
 
-    public void addProperty(Property property){
+    public void addProperty(Property property) {
         propertyRepository.save(property);
     }
 
-    public Property getProperty(Long id){
+    public Property getProperty(Long id) {
         return propertyRepository.findByPropertyId(id);
     }
 

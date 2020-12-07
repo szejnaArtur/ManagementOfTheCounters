@@ -15,8 +15,8 @@ public class ResetPasswordRestController {
     private final static String SUBJECT = "Link to reset your password";
     private final static String TEXT = "You received this email because you used the password recovery option.\n\n"
             + "If you did not ask for it, it is possible that someone did it by mistake or on purpose.\n"
-            +"If you don't want to change your hamster password, you can just ignore this message.\n\n"
-            +"To change your password, click on the link below:\n";
+            + "If you don't want to change your hamster password, you can just ignore this message.\n\n"
+            + "To change your password, click on the link below:\n";
     private final static String LINK = "http://localhost:8080/reset_password/";
 
     private final static String NULL_POINTER_EXCEPTION_MESSAGE = "The user with the given e-mail address does not exist";
