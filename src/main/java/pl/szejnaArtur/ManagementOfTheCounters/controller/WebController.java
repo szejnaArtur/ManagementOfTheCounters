@@ -25,18 +25,6 @@ public class WebController {
         this.propertyService = propertyService;
     }
 
-    @RequestMapping(value = "/user_panel", method = RequestMethod.GET)
-    public ModelAndView userPanel(ModelAndView mav) {
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findByEmail(userName).get();
-        List<Property> properties = propertyService.getPropertiesByUser(user);
-
-        mav.addObject("properties", properties);
-
-        mav.setViewName("user_panel");
-        return mav;
-    }
-
     @RequestMapping(value = "/counters", method = RequestMethod.GET)
     public ModelAndView counterPanel(ModelAndView mav) {
         mav.setViewName("counter");

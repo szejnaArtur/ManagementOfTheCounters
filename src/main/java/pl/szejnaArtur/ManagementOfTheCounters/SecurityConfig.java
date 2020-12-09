@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/user_panel", true)
+                .defaultSuccessUrl("/property", true)
                 .failureUrl("/login?error='Login or password is incorrect.'")
 
                 .and()

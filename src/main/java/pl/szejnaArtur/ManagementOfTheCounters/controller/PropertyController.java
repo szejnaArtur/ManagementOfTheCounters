@@ -1,12 +1,14 @@
 package pl.szejnaArtur.ManagementOfTheCounters.controller;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
@@ -16,12 +18,15 @@ import pl.szejnaArtur.ManagementOfTheCounters.service.PropertyService;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.CounterServiceImpl;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.PropertyServiceImpl;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 @Controller
+@Slf4j
+@RequestMapping(value = "/property")
 public class PropertyController {
 
     private PropertyServiceImpl propertyService;
@@ -35,25 +40,57 @@ public class PropertyController {
         this.counterService = counterService;
     }
 
-    @RequestMapping(value = "/property/addPropertyPanel", method = RequestMethod.GET)
+    @GetMapping
+    public ModelAndView userPanel(ModelAndView mav) {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(userName).get();
+        List<Property> properties = propertyService.getPropertiesByUser(user);
+
+        mav.addObject("properties", properties);
+
+        mav.setViewName("properties");
+        return mav;
+    }
+
+    @GetMapping("/add")
     public ModelAndView addPropertyPanel(ModelAndView mav) {
+        mav.addObject("property", new Property());
         mav.setViewName("addProperty");
         return mav;
     }
 
-    @RequestMapping(value = "/property/add", method = RequestMethod.GET)
-    public ModelAndView addPropertyPanel(ModelAndView mav, @RequestParam("name") String name,
-                                         @RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
-                                         @RequestParam("flatNumber") String flatNumber, @RequestParam("postalCode") String postalCode,
-                                         @RequestParam("city") String city) {
+    public ModelAndView addPropertyPanel(@ModelAttribute @Valid Property property, ModelAndView mav, Errors errors) {
+        if (errors.hasErrors()) {
+            mav.setViewName("addProperty");
+            return mav;
+        }
+
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(userName).get();
-
-        Property property = Property.of(name, street, houseNumber, flatNumber, postalCode, city, user);
+        property.setUser(user);
         propertyService.addProperty(property);
-        mav.setViewName("redirect:/user_panel");
+        mav.setViewName("redirect:/property");
         return mav;
     }
+
+    @PostMapping("/add")
+    public String addPropertyPanel2(@Valid @ModelAttribute Property property, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            return "addProperty";
+        }
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(userName).get();
+        property.setUser(user);
+        propertyService.addProperty(property);
+        log.info("Dodano obiekt do bazy: " + property);
+        return "redirect:/property";
+    }
+
+
+
+
+
 
     @RequestMapping(value = "/property/view/{id}")
     public ModelAndView viewProperty(ModelAndView mav, @PathVariable("id") Long id) {

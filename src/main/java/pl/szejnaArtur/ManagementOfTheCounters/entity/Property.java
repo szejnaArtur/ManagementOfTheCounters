@@ -6,6 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -20,21 +23,26 @@ public class Property {
     private Long propertyId;
 
     @Column
+    @Size(min = 3, message = "Nazwa musi składać się z przynajmniej trzech znaków.")
     private String name;
 
     @Column
+    @NotBlank(message = "To pole jest obowiązkowe.")
     private String street;
 
     @Column
+    @NotBlank(message = "To pole jest obowiązkowe.")
     private String houseNumber;
 
     @Column
     private String flatNumber;
 
     @Column
+    @NotBlank(message = "To pole jest obowiązkowe.")
     private String city;
 
     @Column
+    @NotBlank(message = "To pole jest obowiązkowe.")
     private String postalCode;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

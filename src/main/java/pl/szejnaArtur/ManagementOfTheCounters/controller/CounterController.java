@@ -42,9 +42,6 @@ public class CounterController {
         Property property = propertyService.getProperty(propertyID);
         Counter counter = Counter.of(name, unit, price, billingPeriod, firstBillingPeriod, initialState, property);
 
-//        Counter counter = new Counter();
-//        counter.setName(name);
-
         counterService.addCounter(counter);
 
         mav.setViewName("redirect:/user_panel");

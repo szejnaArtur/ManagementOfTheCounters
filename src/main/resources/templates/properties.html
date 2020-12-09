@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter Manager</title>
+</head>
+<body>
+<form th:action="@{/property/add}" method="get">
+    <button>Add new property</button>
+</form>
+<table>
+    <tbody th:each="property : ${properties}">
+    <tr>
+        <td th:text="${property.name}"></td>
+        <td th:text="${property.street}"></td>
+        <td><a th:href="${'/property/view/'+property.propertyId}">View</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
