@@ -3,58 +3,83 @@
 <head>
     <meta charset="UTF-8" content="text/html">
     <title>Counter Manager</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<form method="post" th:action="@{/property/add}" th:object="${property}">
-    <a th:href="@{/property}">Cancel</a>
+<div th:insert="menu.html :: div"></div>
 
-    <div th:if="${#fields.hasErrors()}">
-        <span class="validationError">
-            Usuń wymienione błędy i spróbuj ponownie.
-        </span>
-    </div>
+<div class="container">
+    <form class="row g-3 needs-validation" method="post" th:action="@{/property/add}" th:object="${property}"
+          novalidate>
 
-    <h3>Wypełnij aby dodać...</h3>
-    <label>Name: </label>
-    <input type="text" th:field="*{name}"/>
-    <span class="validationError" th:if="${#fields.hasErrors('name')}"
-          th:errors="*{name}"></span>
-    <br/>
-
-    <label>Street: </label>
-    <input type="text" th:field="*{street}"/>
-    <span class="validationError" th:if="${#fields.hasErrors('street')}"
-          th:errors="*{street}"></span>
-    <br/>
-
-    <label>House Number: </label>
-    <input type="text" th:field="*{houseNumber}"/>
-    <span class="validationError" th:if="${#fields.hasErrors('houseNumber')}"
-          th:errors="*{houseNumber}"></span>
-    <br/>
-
-    <label>Flat Number: </label>
-    <input type="text" th:field="*{flatNumber}"/>
-    <span class="validationError" th:if="${#fields.hasErrors('flatNumber')}"
-          th:errors="*{flatNumber}"></span>
-    <br/>
-
-    <label>City: </label>
-    <input type="text" th:field="*{city}"/>
-    <span class="validationError" th:if="${#fields.hasErrors('city')}"
-          th:errors="*{city}"></span>
-    <br/>
-
-    <label>Postal Code: </label>
-    <input type="text" th:field="*{postalCode}"/>
-    <span class="validationError" th:if="${#fields.hasErrors('postalCode')}"
-          th:errors="*{postalCode}"></span>
-    <br/>
-
-    <input type="submit" value="Złóż zamówienie">
-
-</form>
+        <div class="col-md-4">
+            <label for="name" class="form-label">Name</label>
+            <input id="name" type="text" class="form-control" th:field="*{name}"/>
+            <span class="small text-danger" th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}"></span>
+        </div>
 
 
+        <div class="col-md-4">
+            <label for="street" class="form-label">Street</label>
+            <input id="street" type="text" class="form-control" th:field="*{street}"/>
+            <span class="small text-danger" th:if="${#fields.hasErrors('street')}"
+                  th:errors="*{street}"></span>
+        </div>
+
+        <div class="col-md-2">
+            <label for="houseNumber" class="form-label">House Number</label>
+            <input id="houseNumber" type="text" class="form-control" th:field="*{houseNumber}"/>
+            <span class="small text-danger" th:if="${#fields.hasErrors('houseNumber')}"
+                  th:errors="*{houseNumber}"></span>
+        </div>
+
+        <div class="col-md-2">
+            <label for="flatNumber" class="form-label">Flat Number</label>
+            <input id="flatNumber" type="text" class="form-control" th:field="*{flatNumber}"/>
+            <span class="small text-danger" th:if="${#fields.hasErrors('flatNumber')}"
+                  th:errors="*{flatNumber}"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label for="city" class="form-label">City</label>
+            <input id="city" type="text" class="form-control" th:field="*{city}"/>
+            <span class="small text-danger" th:if="${#fields.hasErrors('city')}"
+                  th:errors="*{city}"></span>
+        </div>
+
+        <div class="col-md-3">
+            <label for="postalCode" class="form-label">Postal Code</label>
+            <input id="postalCode" type="text" class="form-control" th:field="*{postalCode}" placeholder="XX-XXX"/>
+            <span class="small text-danger" th:if="${#fields.hasErrors('postalCode')}"
+                  th:errors="*{postalCode}"></span>
+        </div>
+
+        <div class="col-md-3">
+            <label for="state" class="form-label">State</label>
+            <input id="state" type="text" class="form-control" th:field="*{state}"/>
+            <span class="small text-danger" th:if="${#fields.hasErrors('state')}"
+                  th:errors="*{state}"></span>
+        </div>
+
+        <div class="col-6 mt-3">
+            <button class="btn btn-primary" type="submit">Add property</button>
+        </div>
+
+        <div class="col-6 mt-3">
+            <a class="btn btn-danger" th:href="@{/property}">Cancel</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>

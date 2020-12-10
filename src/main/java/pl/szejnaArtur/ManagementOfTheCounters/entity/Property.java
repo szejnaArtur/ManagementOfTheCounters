@@ -6,8 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -42,8 +42,12 @@ public class Property {
     private String city;
 
     @Column
-    @NotBlank(message = "To pole jest obowiązkowe.")
+    @Pattern(regexp = "^[0-9]{2}-[0-9]{3}$", message = "Wartość musi być w formie XX-XXX")
     private String postalCode;
+
+    @Column
+    @NotBlank(message = "To pole jest obowiązkowe.")
+    private String state;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
@@ -51,18 +55,4 @@ public class Property {
 
     @OneToMany(mappedBy = "property", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Counter> counters;
-
-    public static Property of(String name, String street, String houseNumber, String flatNumber, String postalCode,
-                              String city, User user) {
-        Property property = new Property();
-        property.setName(name);
-        property.setStreet(street);
-        if (!houseNumber.isEmpty()) property.setHouseNumber(houseNumber);
-        if (!flatNumber.isEmpty()) property.setFlatNumber(flatNumber);
-        if (!postalCode.isEmpty()) property.setPostalCode(postalCode);
-        property.setCity(city);
-        property.setUser(user);
-
-        return property;
-    }
 }
