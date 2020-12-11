@@ -1,28 +1,23 @@
 package pl.szejnaArtur.ManagementOfTheCounters.controller;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
 import pl.szejnaArtur.ManagementOfTheCounters.repository.UserRepository;
-import pl.szejnaArtur.ManagementOfTheCounters.service.PropertyService;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.CounterServiceImpl;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.PropertyServiceImpl;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Controller
 @Slf4j
@@ -87,12 +82,7 @@ public class PropertyController {
         return "redirect:/property";
     }
 
-
-
-
-
-
-    @RequestMapping(value = "/property/view/{id}")
+    @GetMapping("/view/{id}")
     public ModelAndView viewProperty(ModelAndView mav, @PathVariable("id") Long id) {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(userName).get();
@@ -110,5 +100,4 @@ public class PropertyController {
         }
         return mav;
     }
-
 }
