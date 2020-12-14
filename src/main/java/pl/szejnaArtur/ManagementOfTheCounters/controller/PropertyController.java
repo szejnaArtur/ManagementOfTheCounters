@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,22 +53,8 @@ public class PropertyController {
         return mav;
     }
 
-    public ModelAndView addPropertyPanel(@ModelAttribute @Valid Property property, ModelAndView mav, Errors errors) {
-        if (errors.hasErrors()) {
-            mav.setViewName("addProperty");
-            return mav;
-        }
-
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findByEmail(userName).get();
-        property.setUser(user);
-        propertyService.addProperty(property);
-        mav.setViewName("redirect:/property");
-        return mav;
-    }
-
     @PostMapping("/add")
-    public String addPropertyPanel2(@Valid @ModelAttribute Property property, Errors errors, Model model) {
+    public String addPropertyPanel2(@Valid @ModelAttribute Property property, Errors errors) {
         if (errors.hasErrors()) {
             return "addProperty";
         }

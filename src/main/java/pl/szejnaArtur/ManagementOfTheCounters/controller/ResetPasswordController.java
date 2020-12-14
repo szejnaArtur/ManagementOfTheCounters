@@ -52,11 +52,4 @@ public class ResetPasswordController {
         mav.setViewName("redirect:/login");
         return mav;
     }
-
-//    @RequestMapping("/querystring")
-//    @ResponseBody
-//    public String queryStringMapping(@RequestParam String param1) {
-//        return String.format("Otrzymane wartoÅ›ci: param1=%s", param1);
-//    }
-
 }

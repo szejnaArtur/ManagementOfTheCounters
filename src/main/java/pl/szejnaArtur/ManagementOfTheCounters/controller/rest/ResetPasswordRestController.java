@@ -1,8 +1,10 @@
 package pl.szejnaArtur.ManagementOfTheCounters.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import pl.szejnaArtur.ManagementOfTheCounters.component.mailer.SignUpMailer;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
 import pl.szejnaArtur.ManagementOfTheCounters.repository.UserRepository;

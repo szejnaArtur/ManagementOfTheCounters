@@ -18,16 +18,15 @@ public class CounterServiceImpl {
         this.counterRepository = counterRepository;
     }
 
-    public List<Counter> getAllCounters() {
-        return counterRepository.findAll();
-    }
-
     public List<Counter> getAllCountersByProperty(Property property) {
         return counterRepository.findAllByProperty(property);
     }
 
-    public Counter addCounter(Counter counter) {
-        return counterRepository.save(counter);
+    public void addCounter(Counter counter) {
+        counterRepository.save(counter);
     }
 
+    public Counter getCounter(Long id) {
+        return counterRepository.findByCounterId(id);
+    }
 }

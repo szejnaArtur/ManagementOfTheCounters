@@ -11,5 +11,4 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> findAllByUser(User user);
 
     Property findByPropertyId(Long id);
-
 }
