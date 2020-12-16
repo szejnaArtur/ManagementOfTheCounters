@@ -45,6 +45,32 @@
             <td th:text="${counter.firstBillingPeriod}"></td>
         </tr>
     </table>
+
+    <div>
+        <a type="button" class="btn btn-success mb-3 button" th:href="@{/meter_status/add}">Add new meter ststus</a>
+    </div>
+
+<!--    <div>-->
+<!--        <form th:action="@{/meter_status/add}" method="get">-->
+<!--            <input type="hidden" name="counter-id" th:value="${counter.counterId}">-->
+<!--            <button type="submit" class="btn btn-success mb-3 button">Add new meter ststus</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>Data</th>
+            <th>Stan licznika</th>
+        </tr>
+        <tr th:each="meterStatus : ${counter.meterStatutes}">
+            <td class="px-0 py-0">
+                <div class="px-2 py-2 width-100 height-100">01.01.2021</div>
+            </td>
+            <td class="px-0 py-0">
+                <div class="px-2 py-2 width-100 height-100" th:text="${meterStatus.status}"></div>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>
