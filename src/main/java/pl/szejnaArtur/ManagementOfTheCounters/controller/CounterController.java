@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.service.PropertyService;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.CounterServiceImpl;
 
@@ -41,7 +41,7 @@ public class CounterController {
     }
 
     @PostMapping(value = "/add")
-    public String addPropertyPanel(@Valid @ModelAttribute Counter counter, Errors errors, @RequestParam("property-id") String propertyId) {
+    public String addCounter(@Valid @ModelAttribute Counter counter, Errors errors, @RequestParam("property-id") String propertyId) {
         if (errors.hasErrors()) {
             return "addCounter";
         }
@@ -58,15 +58,13 @@ public class CounterController {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(userName).get();
         List<Property> properties = user.getProperties();
-        Counter mainCounter;
         for (Property property : properties) {
             List<Counter> counters = property.getCounters();
             for (Counter counter : counters) {
                 if (counter.getCounterId().equals(id)) {
-                    mainCounter = counterService.getCounter(id);
-                    mav.addObject("counter", mainCounter);
+                    mav.addObject("counter", counterService.getCounter(id));
                     mav.setViewName("counter");
-//                    System.out.println(mainCounter.getName());
+                    break;
                 }
             }
         }

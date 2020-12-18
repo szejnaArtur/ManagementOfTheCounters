@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.CounterServiceImpl;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.PropertyServiceImpl;
 

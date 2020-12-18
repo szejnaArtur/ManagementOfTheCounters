@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
-import pl.szejnaArtur.ManagementOfTheCounters.repository.CounterRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.CounterRepository;
 
 import java.util.List;
 

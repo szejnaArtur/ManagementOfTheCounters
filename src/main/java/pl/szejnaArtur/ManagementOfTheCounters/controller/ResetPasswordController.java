@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.szejnaArtur.ManagementOfTheCounters.component.mailer.RandomStringFactory;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.UserServiceImpl;
 
 @Controller

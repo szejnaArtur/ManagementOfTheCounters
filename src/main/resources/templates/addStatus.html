@@ -18,19 +18,26 @@
 <div th:insert="menu.html :: div"></div>
 
 <div class="container">
-    <form class="row g-3 needs-validation" method="post" th:action="@{/meter_status/add}" th:object="${meter_status}"
+    <form class="row g-3 needs-validation" method="post" th:action="@{/meter_status/add}" th:object="${meterStatus}"
           novalidate>
 
         <div class="col-md-6">
             <label for="date" class="form-label">Date</label>
-            <input id="date" type="month" min="2013-01" max="2050-12" class="form-control"/>
+            <input id="date" type="date" class="form-control" th:field="*{date}"/>
+            <span class="small text-danger" th:if="${#fields.hasErrors('date')}"
+                  th:errors="*{date}"></span>
         </div>
 
         <div class="col-md-6">
             <label for="status" class="form-label">Status</label>
-            <input id="status" type="text" class="form-control" th:field="*{status}"/>
+            <input id="status" type="number" class="form-control" th:field="*{status}"/>
             <span class="small text-danger" th:if="${#fields.hasErrors('status')}"
                   th:errors="*{status}"></span>
+        </div>
+
+        <div class="col-6 mt-3">
+            <input type="hidden" name="counter-id" th:value="${counterId}">
+            <button class="btn btn-primary" type="submit">Add property</button>
         </div>
     </form>
 </div>

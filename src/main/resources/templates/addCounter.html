@@ -59,13 +59,10 @@
             <span class="small text-danger" th:if="${#fields.hasErrors('unit')}" th:errors="*{unit}"></span>
         </div>
 
-        <input type="hidden" name="propertyId" th:value="${propertyId}">
-
         <div class="col-6 mt-3">
+            <input type="hidden" name="propertyId" th:value="${propertyId}">
             <button class="btn btn-primary" type="submit">Add property</button>
         </div>
-
-        <input type="hidden" name="property-id" th:value="${propertyId}">
 
 <!--        <div class="col-6 mt-3">-->
 <!--            <a class="btn btn-danger" th:href="@{/property}">Cancel</a>-->

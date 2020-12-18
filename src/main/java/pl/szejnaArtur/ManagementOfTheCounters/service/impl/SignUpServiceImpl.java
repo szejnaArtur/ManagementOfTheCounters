@@ -8,8 +8,8 @@ import pl.szejnaArtur.ManagementOfTheCounters.component.mailer.RandomStringFacto
 import pl.szejnaArtur.ManagementOfTheCounters.component.mailer.SignUpMailer;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.Role;
 import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.repository.RoleRepository;
-import pl.szejnaArtur.ManagementOfTheCounters.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.RoleRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.service.SignUpService;
 
 import java.util.Optional;
