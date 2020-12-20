@@ -6,10 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Counter;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Property;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.UserRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.service.PropertyService;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.CounterServiceImpl;
 
@@ -49,7 +49,7 @@ public class CounterController {
         Long propertyLong = Long.valueOf(propertyId);
         Property property = propertyService.getProperty(propertyLong);
         counter.setProperty(property);
-        counterService.addCounter(counter);
+        counterService.addOrUpdateCounter(counter);
         return "redirect:/property";
     }
 
@@ -68,6 +68,21 @@ public class CounterController {
                 }
             }
         }
+        return mav;
+    }
+
+    @PostMapping("/update")
+    public ModelAndView updateCounter(ModelAndView mav, @Valid @ModelAttribute Counter counter, Errors errors) {
+        if (errors.hasErrors()) {
+            mav.setViewName("counter");
+            return mav;
+        }
+
+        Counter newCounter = counterService.getCounter(counter.getCounterId());
+        newCounter.updateCounter(counter);
+
+        counterService.addOrUpdateCounter(newCounter);
+        mav.setViewName("redirect:/counter/view/" + counter.getCounterId());
         return mav;
     }
 

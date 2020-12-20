@@ -2,9 +2,9 @@ package pl.szejnaArtur.ManagementOfTheCounters.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.PropertyRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Property;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.PropertyRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.service.PropertyService;
 
 import java.util.List;

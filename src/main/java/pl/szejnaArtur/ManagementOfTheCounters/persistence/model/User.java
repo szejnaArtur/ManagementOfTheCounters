@@ -1,4 +1,4 @@
-package pl.szejnaArtur.ManagementOfTheCounters.entity;
+package pl.szejnaArtur.ManagementOfTheCounters.persistence.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

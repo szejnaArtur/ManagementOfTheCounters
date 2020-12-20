@@ -1,7 +1,7 @@
-package pl.szejnaArtur.ManagementOfTheCounters.entity.repository;
+package pl.szejnaArtur.ManagementOfTheCounters.persistence.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Role;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Role;
 
 import java.util.Optional;
 

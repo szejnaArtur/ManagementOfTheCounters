@@ -1,4 +1,4 @@
-package pl.szejnaArtur.ManagementOfTheCounters.entity;
+package pl.szejnaArtur.ManagementOfTheCounters.persistence.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,6 +50,15 @@ public class Counter {
 
     @OneToMany(mappedBy = "counter", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<MeterStatus> meterStatutes;
+
+    public void updateCounter(Counter counter){
+        this.setName(counter.getName());
+        this.setUnit(counter.getUnit());
+        this.setPrice(counter.getPrice());
+        this.setBillingPeriod(counter.getBillingPeriod());
+        this.setFirstBillingPeriod(counter.getFirstBillingPeriod());
+        this.setInitialState(counter.getInitialState());
+    }
 
 }
 

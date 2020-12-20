@@ -1,6 +1,6 @@
 package pl.szejnaArtur.ManagementOfTheCounters.service;
 
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Property;
 
 public interface PropertyService {
 

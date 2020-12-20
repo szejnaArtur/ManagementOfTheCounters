@@ -2,9 +2,9 @@ package pl.szejnaArtur.ManagementOfTheCounters.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.CounterRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Counter;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Property;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.CounterRepository;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class CounterServiceImpl {
         return counterRepository.findAllByProperty(property);
     }
 
-    public void addCounter(Counter counter) {
+    public void addOrUpdateCounter(Counter counter) {
         counterRepository.save(counter);
     }
 

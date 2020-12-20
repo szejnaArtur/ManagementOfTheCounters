@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.szejnaArtur.ManagementOfTheCounters.component.mailer.SignUpMailer;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.UserRepository;
 
 import java.util.Optional;
 

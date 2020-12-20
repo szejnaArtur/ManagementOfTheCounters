@@ -6,28 +6,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.MeterStatus;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.MeterStatusRepository;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Counter;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.MeterStatus;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Property;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.service.impl.MeterStatusServiceImpl;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/meter_status")
 public class MeterStatusController {
 
     private UserRepository userRepository;
-    private MeterStatusRepository meterStatusRepository;
+    private MeterStatusServiceImpl meterStatusService;
 
     @Autowired
-    public MeterStatusController(UserRepository userRepository, MeterStatusRepository meterStatusRepository) {
+    public MeterStatusController(UserRepository userRepository, MeterStatusServiceImpl meterStatusService) {
         this.userRepository = userRepository;
-        this.meterStatusRepository = meterStatusRepository;
+        this.meterStatusService = meterStatusService;
     }
 
     @GetMapping("/add")
@@ -40,7 +41,7 @@ public class MeterStatusController {
 
     @PostMapping("/add")
     public String addStatus(@Valid @ModelAttribute MeterStatus meter_status, Errors errors,
-                            @RequestParam("counter-id") String counterId) {
+                            @RequestParam("counterId") String counterId) {
         if (errors.hasErrors()) {
             return "addStatus";
         }
@@ -56,9 +57,9 @@ public class MeterStatusController {
         }
 
         for (Counter counter : counters) {
-            if (counter.getCounterId().equals(counterLong)){
+            if (counter.getCounterId().equals(counterLong)) {
                 meter_status.setCounter(counter);
-                meterStatusRepository.save(meter_status);
+                meterStatusService.save(meter_status);
                 break;
             }
         }
@@ -66,4 +67,18 @@ public class MeterStatusController {
         return "redirect:/counter/view/" + counterId;
     }
 
+    @GetMapping("/delete/{meterStatusId}")
+    public ModelAndView deleteMeterStatus(@PathVariable("meterStatusId") Long meterStatusId, ModelAndView mav) {
+        Optional<MeterStatus> optionalId = meterStatusService.findById(meterStatusId);
+        if (optionalId.isPresent()) {
+            MeterStatus meterStatus = optionalId.get();
+            Long counterId = meterStatus.getCounter().getCounterId();
+            mav.setViewName("redirect:/counter/view/" + counterId);
+            meterStatusService.delete(meterStatus);
+        } else {
+            mav.setViewName("error");
+        }
+
+        return mav;
+    }
 }

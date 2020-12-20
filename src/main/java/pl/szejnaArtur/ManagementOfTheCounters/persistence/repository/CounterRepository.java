@@ -1,8 +1,8 @@
-package pl.szejnaArtur.ManagementOfTheCounters.entity.repository;
+package pl.szejnaArtur.ManagementOfTheCounters.persistence.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Counter;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Property;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Counter;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Property;
 
 import java.util.List;
 

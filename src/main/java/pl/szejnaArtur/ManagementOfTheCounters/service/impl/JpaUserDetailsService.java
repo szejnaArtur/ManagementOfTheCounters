@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.UserRepository;
 
 import java.util.Optional;
 

@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import pl.szejnaArtur.ManagementOfTheCounters.component.mailer.RandomStringFactory;
 import pl.szejnaArtur.ManagementOfTheCounters.component.mailer.SignUpMailer;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.Role;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.RoleRepository;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Role;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.RoleRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.UserRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.service.SignUpService;
 
 import java.util.Optional;

@@ -3,8 +3,8 @@ package pl.szejnaArtur.ManagementOfTheCounters.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.User;
-import pl.szejnaArtur.ManagementOfTheCounters.entity.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.UserRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.service.UserService;
 
 import java.util.Optional;

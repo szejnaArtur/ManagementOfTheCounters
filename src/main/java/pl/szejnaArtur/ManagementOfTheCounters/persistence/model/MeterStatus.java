@@ -1,4 +1,4 @@
-package pl.szejnaArtur.ManagementOfTheCounters.entity;
+package pl.szejnaArtur.ManagementOfTheCounters.persistence.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Setter
@@ -21,7 +21,7 @@ public class MeterStatus {
 
     @Column
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
-    private Date date;
+    private LocalDate date;
 
     @Column
     @NotNull(message = "To pole jest obowiązkowe.")
