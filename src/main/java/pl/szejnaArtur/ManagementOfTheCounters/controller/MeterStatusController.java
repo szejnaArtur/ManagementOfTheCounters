@@ -59,7 +59,7 @@ public class MeterStatusController {
         for (Counter counter : counters) {
             if (counter.getCounterId().equals(counterLong)) {
                 meter_status.setCounter(counter);
-                meterStatusService.save(meter_status);
+                meterStatusService.saveOrUpdate(meter_status);
                 break;
             }
         }
@@ -75,6 +75,21 @@ public class MeterStatusController {
             Long counterId = meterStatus.getCounter().getCounterId();
             mav.setViewName("redirect:/counter/view/" + counterId);
             meterStatusService.delete(meterStatus);
+        } else {
+            mav.setViewName("error");
+        }
+
+        return mav;
+    }
+
+    @PostMapping("/update/{meterStatusId}")
+    public ModelAndView updateMeterCounter(ModelAndView mav, @PathVariable("meterStatusId") Long meterStatusId, @RequestParam("meterStatus") Double status){
+        Optional<MeterStatus> optionalMeterStatus = meterStatusService.findById(meterStatusId);
+        if(optionalMeterStatus.isPresent()){
+            MeterStatus meterStatus = optionalMeterStatus.get();
+            meterStatus.setStatus(status);
+            meterStatusService.saveOrUpdate(meterStatus);
+            mav.setViewName("redirect:/counter/view/" + meterStatus.getCounter().getCounterId());
         } else {
             mav.setViewName("error");
         }

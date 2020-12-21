@@ -17,7 +17,7 @@ public class MeterStatusServiceImpl {
         this.meterStatusRepository = repository;
     }
 
-    public void save(MeterStatus meterStatus) {
+    public void saveOrUpdate(MeterStatus meterStatus) {
         meterStatusRepository.save(meterStatus);
     }
 

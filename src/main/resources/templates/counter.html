@@ -92,22 +92,19 @@
 
         <tr th:each="meterStatus : ${counter.meterStatutes}">
             <td class="px-0 py-0">
-                <div class="px-2 py-2 width-100 height-100">
-                    <input class="width-100 input_nostyle" type="date" th:value="${meterStatus.date}"/>
-                </div>
+                <div class="px-2 py-2 width-100 height-100" th:text="${meterStatus.date}"></div>
             </td>
             <td class="px-0 py-0">
-
                 <div style="padding: 0 10px">
-                    <input style="width: 55%; padding-top: 9px " class="input_nostyle f-left" type="number"
-                           th:value="${meterStatus.status}"/>
+                    <form method="post" th:action="${'/meter_status/update/'+meterStatus.meter_status_id}">
+                        <input style="width: 55%" class="input_nostyle f-left btn-edit" type="number"
+                               name="meterStatus" th:value="${meterStatus.status}" step="0.01"/>
+                        <button class="btn btn-primary btn-sm f-right btn-edit">Edit</button>
+                    </form>
                     <form method="get">
                         <a class="btn btn-danger btn-sm f-right btn-delete"
                            th:href="${'/meter_status/delete/'+meterStatus.meter_status_id}">Delete</a>
                     </form>
-                    <a href="#" class="btn btn-primary btn-sm f-right btn-edit">
-                        Edit
-                    </a>
                 </div>
             </td>
         </tr>
