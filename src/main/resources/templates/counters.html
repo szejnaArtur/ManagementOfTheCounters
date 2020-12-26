@@ -26,7 +26,7 @@
         <tr th:each="counter : ${counters}">
             <td class="px-0 py-0">
                 <a class="text-decoration-none text-dark" th:href="${'/counter/view/'+counter.counterId}">
-                    <div class="px-2 py-2 width-100 height-100" th:text="${counter.name}"></div>
+                    <div class="px-2 py-2 width-100 height-100 text-uppercase" th:text="${counter.name}"></div>
                 </a>
             </td>
             <td class="px-0 py-0">

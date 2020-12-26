@@ -7,6 +7,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Counter;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.MeterStatus;
 import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Property;
 import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
 import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.UserRepository;
@@ -14,8 +15,7 @@ import pl.szejnaArtur.ManagementOfTheCounters.service.PropertyService;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.CounterServiceImpl;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/counter")
@@ -55,19 +55,14 @@ public class CounterController {
 
     @GetMapping("/view/{id}")
     public ModelAndView viewCounter(ModelAndView mav, @PathVariable("id") Long id) {
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findByEmail(userName).get();
-        List<Property> properties = user.getProperties();
-        for (Property property : properties) {
-            List<Counter> counters = property.getCounters();
-            for (Counter counter : counters) {
-                if (counter.getCounterId().equals(id)) {
-                    mav.addObject("counter", counterService.getCounter(id));
-                    mav.setViewName("counter");
-                    break;
-                }
-            }
+        Counter counter = counterService.getCounter(id);
+        if (counter != null){
+            mav.addObject("counter", counter);
+            mav.setViewName("counter");
+        } else {
+            mav.setViewName("error");
         }
+
         return mav;
     }
 

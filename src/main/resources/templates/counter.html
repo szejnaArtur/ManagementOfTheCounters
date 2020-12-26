@@ -21,7 +21,7 @@
     <form method="post" th:object="${counter}" th:action="@{/counter/update}">
 
         <div class="pb-3">
-            <input class="input_nostyle width-100 text-center" th:value="${counter.name}" th:field="*{name}">
+            <input class="input_nostyle width-100 text-center text-uppercase form-control-lg" th:value="${counter.name}" th:field="*{name}">
             <p class="text-center">counter</p>
         </div>
 
