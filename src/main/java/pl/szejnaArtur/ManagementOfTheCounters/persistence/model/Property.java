@@ -55,4 +55,14 @@ public class Property {
 
     @OneToMany(mappedBy = "property", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Counter> counters;
+
+    public void updateProperty(Property property) {
+        this.setName(property.getName());
+        this.setStreet(property.getStreet());
+        this.setHouseNumber(property.getHouseNumber());
+        this.setFlatNumber(property.getFlatNumber());
+        this.setCity(property.getCity());
+        this.setPostalCode(property.getPostalCode());
+//        this.setState(property.getState());
+    }
 }

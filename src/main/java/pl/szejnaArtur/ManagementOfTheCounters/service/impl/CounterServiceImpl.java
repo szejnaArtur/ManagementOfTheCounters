@@ -9,7 +9,9 @@ import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Property;
 import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.User;
 import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.CounterRepository;
 import pl.szejnaArtur.ManagementOfTheCounters.persistence.repository.UserRepository;
+import pl.szejnaArtur.ManagementOfTheCounters.service.PropertyService;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,19 +20,39 @@ public class CounterServiceImpl {
 
     private CounterRepository counterRepository;
     private UserRepository userRepository;
+    private PropertyService propertyService;
 
     @Autowired
-    public CounterServiceImpl(CounterRepository counterRepository, UserRepository userRepository) {
+    public CounterServiceImpl(CounterRepository counterRepository, UserRepository userRepository, PropertyService propertyService) {
         this.counterRepository = counterRepository;
         this.userRepository = userRepository;
+        this.propertyService = propertyService;
     }
 
     public List<Counter> getAllCountersByProperty(Property property) {
         return counterRepository.findAllByProperty(property);
     }
 
-    public void addOrUpdateCounter(Counter counter) {
-        counterRepository.save(counter);
+    public void addCounter(Counter counter, Long propertyId) {
+
+        Property property = propertyService.getProperty(propertyId);
+        if (property != null){
+            counter.setProperty(property);
+            counterRepository.save(counter);
+        } else {
+            throw new NullPointerException("There is no property associated with this user");
+        }
+    }
+
+    public void updateCounter(Counter counter) {
+
+        Counter newCounter = getCounter(counter.getCounterId());
+        if (newCounter != null){
+            newCounter.updateCounter(counter);
+            counterRepository.save(newCounter);
+        } else {
+            throw new NullPointerException("There is no counter associated with this user");
+        }
     }
 
     public Counter getCounter(Long id) {
@@ -49,6 +71,17 @@ public class CounterServiceImpl {
             }
         }
         return null;
+    }
+
+    public List<Counter> getAllCounters(){
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(userName).get();
+        List<Property> properties = user.getProperties();
+        List<Counter> counters = new ArrayList<>();
+        for (Property property : properties) {
+            counters.addAll(property.getCounters());
+        }
+        return counters;
     }
 
     private void sortMeterStatusByDate(Counter counter){

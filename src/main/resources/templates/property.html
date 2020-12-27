@@ -19,37 +19,73 @@
 <div th:insert="menu.html :: div"></div>
 
 <div class="container-lg">
-    <div class="pb-3">
-        <h1 class="text-center" th:text="${property.name}"></h1>
-    </div>
 
-    <table class="table table-striped table-bordered table-condensed">
-        <tr>
-            <td>Street</td>
-            <td th:text="${property.street}"></td>
-        </tr>
-        <tr>
-            <td>House Number</td>
-            <td th:text="${property.houseNumber}"></td>
-        </tr>
-        <tr>
-            <td>Flat Number</td>
-            <td th:text="${property.flatNumber}"></td>
-        </tr>
-        <tr>
-            <td>City</td>
-            <td th:text="${property.city}"></td>
-        </tr>
-        <tr>
-            <td>Postal Coder</td>
-            <td th:text="${property.postalCode}"></td>
-        </tr>
-    </table>
+    <form method="post" th:object="${property}" th:action="${'/property/update/'+property.propertyId}">
 
-    <div>
-        <form th:action="@{/counter/add}">
-            <input type="hidden" name="property-id" th:value="${property.propertyId}">
-            <button type="submit" class="btn btn-success mb-3 button">Add new counter</button>
+        <div class="pb-3">
+            <input class="input_nostyle width-100 text-center text-uppercase form-control-lg" th:value="${property.name}" th:field="*{name}">
+            <span class="small text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            <p class="text-center">property</p>
+        </div>
+
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <td>Street</td>
+                <td>
+                    <div class="width-100 height-100">
+                        <input class="input_nostyle width-100" th:value="${property.street}" th:field="*{street}">
+                        <span class="small text-danger" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>House Number</td>
+                <td>
+                    <div class="width-100 height-100">
+                        <input class="input_nostyle width-100" th:value="${property.houseNumber}" th:field="*{houseNumber}">
+                        <span class="small text-danger" th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Flat Number</td>
+                <td>
+                    <div class="width-100 height-100">
+                        <input class="input_nostyle width-100" th:value="${property.flatNumber}" th:field="*{flatNumber}">
+                        <span class="small text-danger" th:if="${#fields.hasErrors('flatNumber')}" th:errors="*{flatNumber}"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>
+                    <div class="width-100 height-100">
+                        <input class="input_nostyle width-100" th:value="${property.city}" th:field="*{city}">
+                        <span class="small text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Postal Coder</td>
+                <td>
+                    <div class="width-100 height-100">
+                        <input class="input_nostyle width-100" th:value="${property.postalCode}" th:field="*{postalCode}">
+                        <span class="small text-danger" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="f-left">
+            <input type="hidden" th:value="${property.propertyId}" th:field="*{propertyId}">
+            <input type="hidden" th:value="${property.state}" th:field="*{state}">
+            <button type="submit" class="btn btn-success mb-3">Save</button>
+        </div>
+    </form>
+
+    <div class="f-left">
+        <form method="get" th:action="${'/counter/add/'+property.propertyId}">
+            <button type="submit" class="btn btn-success ml-3 mb-3">Add new status</button>
         </form>
     </div>
 

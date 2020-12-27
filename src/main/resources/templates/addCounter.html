@@ -19,7 +19,7 @@
 <div th:insert="menu.html :: div"></div>
 
 <div class="container">
-    <form class="row g-3 needs-validation" method="post" th:action="@{/counter/add}" th:object="${counter}" novalidate>
+    <form class="row g-3 needs-validation" method="post" th:action="@{'/counter/add/'+${propertyId}}" th:object="${counter}" novalidate>
 
         <div class="col-md-9">
             <label for="name" class="form-label">Name</label>
