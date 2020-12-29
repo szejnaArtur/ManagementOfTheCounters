@@ -84,6 +84,16 @@
         </form>
     </div>
 
+    <div class="f-left">
+        <form method="get" th:action="${'/counter/delete/'+counter.counterId}">
+            <button type="submit" class="btn btn-success ml-3 mb-3">Delete counter</button>
+        </form>
+    </div>
+
+    <div style="clear: both">
+        <span class="small text-danger" th:text="${errorMessage}"></span>
+    </div>
+
     <table class="table table-striped table-bordered table-condensed">
         <tr>
             <th>Data</th>

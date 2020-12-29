@@ -6,9 +6,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.Counter;
+import pl.szejnaArtur.ManagementOfTheCounters.persistence.model.MeterStatus;
 import pl.szejnaArtur.ManagementOfTheCounters.service.impl.CounterServiceImpl;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/counter")
@@ -41,7 +44,7 @@ public class CounterController {
     @GetMapping("/view/{id}")
     public ModelAndView viewCounter(ModelAndView mav, @PathVariable("id") Long counterId) {
         Counter counter = counterService.getCounter(counterId);
-        if (counter != null){
+        if (counter != null) {
             mav.addObject("counter", counter);
             mav.setViewName("counter");
         } else {
@@ -67,6 +70,27 @@ public class CounterController {
     public ModelAndView viewAllCounters(ModelAndView mav) {
         mav.addObject("counters", counterService.getAllCounters());
         mav.setViewName("counters");
+        return mav;
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteCounter(@PathVariable("id") Long counterId, ModelAndView mav) {
+        Optional<Counter> optionalCounter = counterService.findById(counterId);
+        if (optionalCounter.isPresent()) {
+            Counter counter = optionalCounter.get();
+            List<MeterStatus> meterStatutes = counter.getMeterStatutes();
+            if(meterStatutes.isEmpty()){
+                counterService.delete(counter.getCounterId());
+                mav.setViewName("redirect:/property/view/" + counter.getProperty().getPropertyId());
+            } else {
+                mav.addObject("errorMessage", "To delete a counter you cannot have statuses in it!");
+                mav.addObject("counter", counter);
+                mav.setViewName("counter");
+            }
+        } else {
+            mav.setViewName("error");
+        }
+
         return mav;
     }
 }

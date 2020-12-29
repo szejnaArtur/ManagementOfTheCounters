@@ -14,6 +14,7 @@ import pl.szejnaArtur.ManagementOfTheCounters.service.PropertyService;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CounterServiceImpl {
@@ -21,12 +22,15 @@ public class CounterServiceImpl {
     private CounterRepository counterRepository;
     private UserRepository userRepository;
     private PropertyService propertyService;
+    private MeterStatusServiceImpl meterStatusService;
 
     @Autowired
-    public CounterServiceImpl(CounterRepository counterRepository, UserRepository userRepository, PropertyService propertyService) {
+    public CounterServiceImpl(CounterRepository counterRepository, UserRepository userRepository,
+                              PropertyService propertyService, MeterStatusServiceImpl meterStatusService) {
         this.counterRepository = counterRepository;
         this.userRepository = userRepository;
         this.propertyService = propertyService;
+        this.meterStatusService = meterStatusService;
     }
 
     public List<Counter> getAllCountersByProperty(Property property) {
@@ -84,9 +88,17 @@ public class CounterServiceImpl {
         return counters;
     }
 
+    public Optional<Counter> findById(Long id){
+        return counterRepository.findById(id);
+    }
+
     private void sortMeterStatusByDate(Counter counter){
         List<MeterStatus> meterStatuses = counter.getMeterStatutes();
         meterStatuses.sort(Comparator.comparing(MeterStatus::getDate));
         counter.setMeterStatutes(meterStatuses);
+    }
+
+    public void delete(Long id) {
+        counterRepository.deleteById(id);
     }
 }
